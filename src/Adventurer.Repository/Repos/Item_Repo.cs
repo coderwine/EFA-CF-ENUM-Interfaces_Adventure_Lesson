@@ -4,20 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 //ANCHOR: TOP
-
-//* Remove namespace
-// namespace Adventurer.Repository.Repos
-// {
 public class Item_Repo
 {
-    //? We're going to create the same CRUD functionality for our Items that can did for our adventurer. 
-    //! Have Students build out with you.
-    //* We can split screen what we did in the previous build
-
+    
     private readonly List<Item> _itemDB = new List<Item>();
     private int _count; 
 
-    //CREATE
     public bool AddItemToDatabase(Item item)
     {
         if(item is null)
@@ -31,7 +23,6 @@ public class Item_Repo
         return true;
     }
 
-    //READ
     public List<Item> GetAllItemsFromDatabase()
     {
         return _itemDB;
@@ -50,7 +41,6 @@ public class Item_Repo
         return null;
     }
 
-    //UPDATE
     public bool UpdateItem(int id, Item newItem)
     {
         var oldItem = GetItemByID(id);
@@ -66,7 +56,6 @@ public class Item_Repo
         return true;
     }
 
-    //DELETE
     public bool RemoveItemFromDatabase(int id)
     {
         var item = GetItemByID(id);
@@ -83,13 +72,6 @@ public class Item_Repo
 
     /*
     LINK: Next
-    ?   We're going now going to go to our Adventurer.UI folder and create a folder within that, naming it "UI".
-
-    ?   Inside that folder, let's create a class file and name it, "Program_UI"
-
-        - Program_UI.cs
-        - src\Adventurer.UI\UI\Program_UI.cs
+        - 
     */
 }
-
-// }
