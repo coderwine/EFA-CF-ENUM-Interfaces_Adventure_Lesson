@@ -6,7 +6,6 @@ Project folder name: **ENUM-Interfaces_Adventurer**
 
 **Instructor Notes**
 - **START** in ```StartLesson.md``` - within the **src folder**.
-- Test folder is simply for testing the lesson itself. Testing will be a focused, smaller lesson.
 - **TEST Folder**: This is strictly for the lesson build, not for this actual lesson.
   - Testing lesson will include these base builds, but will be a separate repo that the students will pull down and take notes.
 ---
