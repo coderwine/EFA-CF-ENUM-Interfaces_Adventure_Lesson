@@ -27,7 +27,8 @@ using System.Threading.Tasks;
                     + " \t 5. Delete Character\n"
                     + " \t=== Item Options === \n"
                     + " \t 6. Create Item\n"
-                    + " \t 7. Delete Item\n"
+                    + " \t 7. View Available Items\n"
+                    + " \t 8. Delete Item\n"
                     + " \t=== Settings === \n"
                     + " \t x. Close Application \n"
                 );
@@ -55,6 +56,9 @@ using System.Threading.Tasks;
                         AddItemToDatabase();
                         break;
                     case "7":
+                        ViewAllItems();
+                        break;
+                    case "8":
                         DeleteItem();
                         break;
                     case "x":
@@ -108,18 +112,30 @@ using System.Threading.Tasks;
 
             if(addItemsResponse == "y")        
             {
-                AddItemToDatabase();
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                System.Console.WriteLine("Select item by ID: ");
-                Console.ResetColor();
-                DisplayItems(_iRepo.GetAllItemsFromDatabase());
-                int itemSelected = int.Parse(Console.ReadLine());
 
-                if(itemSelected != null)
+                List<Item> check = _iRepo.GetAllItemsFromDatabase();
+
+                if(check.Count() > 0)
                 {
-                    Item chosenItem = _iRepo.GetItemByID(itemSelected);
-                    itemsToAdd.Add(chosenItem);
-                    _iRepo.RemoveItemFromDatabase(itemSelected);
+                    AddItemToDatabase();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    System.Console.WriteLine("Select item by ID: ");
+                    Console.ResetColor();
+                    DisplayItems(_iRepo.GetAllItemsFromDatabase());
+                    int itemSelected = int.Parse(Console.ReadLine());
+
+                    if(itemSelected != null)
+                    {
+                        Item chosenItem = _iRepo.GetItemByID(itemSelected);
+                        itemsToAdd.Add(chosenItem);
+                        _iRepo.RemoveItemFromDatabase(itemSelected);
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("Sorry No items are available to put in your pack.");
+                    addingItems = false;
+                    PressAnyKey();
                 }
             }
             else
@@ -157,7 +173,7 @@ using System.Threading.Tasks;
 
         foreach(Adventurer a in adventurersInDB)
         {
-            displayCharacter(a);
+            DisplayCharacter(a);
         }
 
         PressAnyKey();
@@ -171,7 +187,7 @@ using System.Threading.Tasks;
 
         foreach (Adventurer a in adventurers)
         {
-            displayCharacter(a);
+            DisplayCharacter(a);
         }
 
         System.Console.Write(
@@ -208,7 +224,7 @@ using System.Threading.Tasks;
 
         foreach (var a in adventurers)
         {
-            displayCharacter(a);
+            DisplayCharacter(a);
         }
 
         System.Console.Write("\tPlease select a character by ID: ");
@@ -260,7 +276,6 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
-
     private void DeleteAdventurer()
     {
         Console.Clear();
@@ -270,7 +285,7 @@ using System.Threading.Tasks;
         System.Console.WriteLine("\t=== Remove Adventurer ===\n");
         foreach (Adventurer a in adventurers)
         {
-            displayCharacter(a);
+            DisplayCharacter(a);
         }
 
         try
@@ -337,6 +352,16 @@ using System.Threading.Tasks;
         PressAnyKey();
     }
 
+    private void ViewAllItems()
+    {
+        Console.Clear();
+
+        List<Item> allItems = _iRepo.GetAllItemsFromDatabase();
+
+        DisplayItems(allItems);
+
+        PressAnyKey();
+    }
     private void DeleteItem()
     {
         Console.Clear();
@@ -365,7 +390,7 @@ using System.Threading.Tasks;
         PressAnyKey();
     }
 
-    private void displayCharacter(Adventurer a)
+    private void DisplayCharacter(Adventurer a)
     {
         System.Console.WriteLine(
                 $"\tID: {a.ID}\n" +
