@@ -22,11 +22,12 @@ using System.Threading.Tasks;
                     + " \t=== Adventurer Options === \n"
                     + " \t 1. Create Character\n"
                     + " \t 2. View Characters\n"
-                    + " \t 3. Update Character\n"
-                    + " \t 4. Delete Character\n"
+                    + " \t 3. View a Character\n"
+                    + " \t 4. Update Character\n"
+                    + " \t 5. Delete Character\n"
                     + " \t=== Item Options === \n"
-                    + " \t 5. Create Item\n"
-                    + " \t 6. Delete Item\n"
+                    + " \t 6. Create Item\n"
+                    + " \t 7. Delete Item\n"
                     + " \t=== Settings === \n"
                     + " \t x. Close Application \n"
                 );
@@ -42,15 +43,18 @@ using System.Threading.Tasks;
                         ViewAllAdventurers();
                         break;
                     case "3":
-                        UpdateAdventurer();
+                        ViewAdventurerByID();
                         break;
                     case "4":
-                        DeleteAdventurer();
+                        UpdateAdventurer();
                         break;
                     case "5":
-                        AddItemToDatabase();
+                        DeleteAdventurer();
                         break;
                     case "6":
+                        AddItemToDatabase();
+                        break;
+                    case "7":
                         DeleteItem();
                         break;
                     case "x":
@@ -159,6 +163,43 @@ using System.Threading.Tasks;
         PressAnyKey();
     }
 
+    private void ViewAdventurerByID()
+    {
+        Console.Clear();
+
+        List<Adventurer> adventurers = _aRepo.GetAllAdventurers();
+
+        foreach (Adventurer a in adventurers)
+        {
+            displayCharacter(a);
+        }
+
+        System.Console.Write(
+            "\t Select User by ID: "
+        );
+        int idSelected = int.Parse(Console.ReadLine());
+
+        Adventurer selectedAdventurer = _aRepo.GetAdventurerByID(idSelected);
+
+        if(selectedAdventurer != null)
+        {
+            System.Console.WriteLine(
+                "\t--- Character --- \n" +
+                $"\tName: {selectedAdventurer.Name}\n" +
+                $"\tRace: {selectedAdventurer.Race}\n" +
+                $"\tProfession: {selectedAdventurer.Profession}\n"
+            );
+
+            DisplayItems(selectedAdventurer.Pack);
+
+        }
+        else
+        {
+            System.Console.WriteLine("Sorry, no character with that ID number.");
+        }
+
+        PressAnyKey();
+    }
     private void UpdateAdventurer()
     {
         Console.Clear();
