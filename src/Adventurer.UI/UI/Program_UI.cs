@@ -162,7 +162,6 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
-
     private void ViewAllAdventurers()
     {
         Console.Clear();
@@ -178,7 +177,6 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
-
     private void ViewAdventurerByID()
     {
         Console.Clear();
@@ -266,6 +264,21 @@ using System.Threading.Tasks;
             updatedAdventurer.Profession = selectedAdventurer.Profession;
         }
 
+        System.Console.WriteLine("Would you like to update your pack? y/n \n");
+        char packChange = char.Parse(Console.ReadLine().ToLower());
+
+        if(packChange == 'y')
+        {
+            DisplayItems(selectedAdventurer.Pack);
+            System.Console.Write("Select item by ID number: ");
+            int selectedItem = int.Parse(Console.ReadLine());
+
+        }
+        else
+        {
+            updatedAdventurer.Pack = selectedAdventurer.Pack;
+        }
+
         updatedAdventurer.Race = selectedAdventurer.Race;
 
         bool isSuccessful = _aRepo.UpdateAdventurerData(idSelected, updatedAdventurer);
@@ -276,6 +289,7 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
+
     private void DeleteAdventurer()
     {
         Console.Clear();
@@ -351,7 +365,6 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
-
     private void ViewAllItems()
     {
         Console.Clear();
@@ -362,6 +375,7 @@ using System.Threading.Tasks;
 
         PressAnyKey();
     }
+    
     private void DeleteItem()
     {
         Console.Clear();
@@ -399,7 +413,6 @@ using System.Threading.Tasks;
                 $"\tClass: {a.Profession}\n"
             );
     }
-
     private void DisplayItems(List<Item> pack)
     {
         System.Console.WriteLine("\t----------ITEMS-------------\n");
@@ -415,7 +428,6 @@ using System.Threading.Tasks;
         System.Console.WriteLine("\t---------------------------\n");
         Console.ResetColor();
     }
-
     private void PressAnyKey()
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -423,7 +435,6 @@ using System.Threading.Tasks;
         Console.ResetColor();
         Console.ReadKey();
     }
-
     private bool CloseApplication()
     {
         Console.Clear();

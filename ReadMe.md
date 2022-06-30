@@ -32,10 +32,10 @@ git commit -m "Framed Project"
 
 These are also at the bottom of ```Program_UI.cs```
 
-- Add an option to View a Single Adventurer.
-- Consider selecting an existing item in character creation instead of starting at creating an item.
-- Include a View all Items option.
-- Include a View Item by ID option.
+- Add an option to View a Single Adventurer. **done**
+- Consider selecting an existing item in character creation instead of starting at creating an item. **done**
+- Include a View all Items option. **done**
+- Include a View Item by ID option. 
 - Update the Adventurer Pack to add items from an the item list instead of currently the whole list.
     - Consider if there are more than one adventurer and they pull from the same item list.
     - What about removing items from the adventurers pack?
